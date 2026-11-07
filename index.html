@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gerardo — Portfolio</title>
+  <meta name="description" content="Gerardo's portfolio: projects, skills and contact.">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Apply the saved theme before first paint to avoid a flash
+    try {
+      const t = localStorage.getItem("theme");
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="#home">Gerardo<span>.</span></a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills-section">Skills</a>
+      <a href="#contact">Contact</a>
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme">◐</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <p class="eyebrow">Hi, I'm</p>
+      <h1>Gerardo<br><span class="accent">software &amp; data.</span></h1>
+      <p class="lead">I build apps and systems that turn data into useful solutions: from Android applications to machine learning models and LLM-powered agents.</p>
+      <div class="cta">
+        <a class="btn primary" href="#projects">View projects</a>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About me</h2>
+      <div class="about">
+        <p>Tell your story here in two or three paragraphs: what you study or do for a living, what you are passionate about, and what kind of work you are looking for.</p>
+        <ul class="facts">
+          <li><strong>Location</strong> Your city, Country</li>
+          <li><strong>Focus</strong> Software development · Data science · AI</li>
+          <li><strong>Open to</strong> Projects / Jobs / Collaborations</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div id="filters" class="filters" role="group" aria-label="Filter projects"></div>
+      <div id="project-grid" class="grid"></div>
+    </section>
+
+    <section id="skills-section">
+      <h2>Skills</h2>
+      <div id="skills" class="skills"></div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+      <p>Have a project in mind or just want to say hi? Drop me a line.</p>
+      <a class="btn primary" href="mailto:ggschekaiban@hotmail.com">ggschekaiban@hotmail.com</a>
+      <div class="links">
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Gerardo. Handcrafted with HTML, CSS and JS.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
