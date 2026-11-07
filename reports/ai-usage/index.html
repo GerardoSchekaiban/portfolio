@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Usage &amp; Cost by User — Demo</title>
+  <meta name="description" content="Interactive demo report on fictional data: who uses which AI models, how much it costs, and what changed.">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+<header class="top">
+  <div>
+    <h1>AI Usage &amp; Cost by User</h1>
+    <p class="subtitle">Model &amp; product usage — input tokens, output tokens and cost (USD) · fictional company, demo data</p>
+  </div>
+  <div class="top-right">
+    <span class="pill">Demo</span>
+    <a class="top-btn" href="../../index.html#projects">← Portfolio</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===== Filters ===== -->
+  <section class="filters" aria-label="Filters">
+    <label class="field">From
+      <input id="f-from" type="date">
+    </label>
+    <label class="field">To
+      <input id="f-to" type="date">
+    </label>
+    <div class="presets" role="group" aria-label="Date presets">
+      <button class="seg" data-days="7">7d</button>
+      <button class="seg" data-days="14">14d</button>
+      <button class="seg" data-days="30">30d</button>
+    </div>
+    <label class="field">Product
+      <select id="f-product"></select>
+    </label>
+    <label class="field">Model
+      <select id="f-model"></select>
+    </label>
+    <label class="field grow">User (name)
+      <input id="f-user" type="search" placeholder="Search user…" autocomplete="off">
+    </label>
+    <button id="f-reset" class="btn-reset" hidden>Reset</button>
+  </section>
+  <div id="chips" class="chips"></div>
+
+  <!-- ===== KPI tiles ===== -->
+  <section class="kpis" id="kpis">
+    <article class="kpi teal"   data-kpi="inp"><h3>Input tokens</h3><p class="val">—</p><p class="sub"></p><p class="delta"></p></article>
+    <article class="kpi orange" data-kpi="out"><h3>Output tokens</h3><p class="val">—</p><p class="sub"></p><p class="delta"></p></article>
+    <article class="kpi navy"   data-kpi="cost"><h3>Cost (USD)</h3><p class="val">—</p><p class="sub"></p><p class="delta"></p></article>
+    <article class="kpi teal"   data-kpi="users"><h3>Active users</h3><p class="val">—</p><p class="sub">distinct users</p><p class="delta"></p></article>
+    <article class="kpi orange" data-kpi="req"><h3>Requests</h3><p class="val">—</p><p class="sub"></p><p class="delta"></p></article>
+  </section>
+
+  <section class="unit" id="unit" aria-label="Unit economics"></section>
+
+  <section class="callout" id="headline"></section>
+
+  <!-- ===== Over time ===== -->
+  <div class="row two">
+    <section class="card">
+      <header><h2>Daily Tokens</h2><p class="sub">input (left axis) vs output (right axis). Axes are scaled independently.</p></header>
+      <div class="chart-box"><canvas id="c-tokens" role="img" aria-label="Daily input and output tokens"></canvas></div>
+      <p class="insight" id="i-tokens"></p>
+      <footer class="card-foot" id="f-tokens-foot"></footer>
+    </section>
+    <section class="card">
+      <header><h2>Daily Cost (USD)</h2><p class="sub">drag across days to select a range · click a day to isolate it</p></header>
+      <div class="chart-box"><canvas id="c-daily" role="img" aria-label="Daily cost"></canvas></div>
+      <p class="insight" id="i-daily"></p>
+      <footer class="card-foot" id="f-daily-foot"></footer>
+    </section>
+  </div>
+
+  <!-- ===== Breakdowns ===== -->
+  <div class="metric-bar">
+    <span>Breakdowns by</span>
+    <button class="seg active" data-metric="cost"     aria-pressed="true">Cost</button>
+    <button class="seg"        data-metric="tokens"   aria-pressed="false">Tokens</button>
+    <button class="seg"        data-metric="requests" aria-pressed="false">Requests</button>
+    <span class="hint">Click any bar, slice or row to filter the whole report</span>
+  </div>
+
+  <div class="row two">
+    <section class="card">
+      <header><h2 id="t-model">Cost by Model</h2><p class="sub">per model, selected period</p></header>
+      <div class="chart-box"><canvas id="c-model" role="img" aria-label="Breakdown by model"></canvas></div>
+      <p class="insight" id="i-model"></p>
+      <footer class="card-foot" id="f-model-foot"></footer>
+    </section>
+    <section class="card">
+      <header><h2 id="t-product">Cost by Product</h2><p class="sub">share per product</p></header>
+      <div class="donut-wrap">
+        <div class="chart-box donut"><canvas id="c-product" role="img" aria-label="Share by product"></canvas></div>
+        <ul id="product-list" class="plist"></ul>
+      </div>
+      <p class="insight" id="i-product"></p>
+      <footer class="card-foot" id="f-product-foot"></footer>
+    </section>
+  </div>
+
+  <!-- ===== Users ===== -->
+  <section class="card">
+    <header><h2 id="t-users">Top 15 Users by Cost</h2><p class="sub">highest-spending users in the selected period</p></header>
+    <div class="chart-box users"><canvas id="c-users" role="img" aria-label="Top users"></canvas></div>
+    <p class="insight" id="i-users"></p>
+    <footer class="card-foot" id="f-users-foot"></footer>
+  </section>
+
+  <p class="foot">All users, volumes and figures in this demo are fictional. Model names are public identifiers; the prices are illustrative effective rates, not real billing data.</p>
+</main>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

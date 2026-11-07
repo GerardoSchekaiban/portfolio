@@ -10,6 +10,16 @@ const GITHUB_MAX_REPOS = 6;
 // Based on folders found on your machine; review and adjust titles and descriptions.
 const projects = [
   {
+    title: "AI Usage & Cost Dashboard",
+    description: "Interactive report on who uses which AI models, what it costs and what changed. Cross-filtering, drag-to-select dates and written insights. Built on fictional data.",
+    tags: ["Data Analysis", "Dashboard", "JavaScript"],
+    image: "img/ai-usage-preview.svg",
+    href: "reports/ai-usage/",
+    linkLabel: "Open interactive report",
+    demo: "",
+    code: "",
+  },
+  {
     title: "Metadata Quality Scorecard",
     description: "Interactive report that turns the documentation coverage and quality of 800+ data tables into a story: where things stand, where the gaps are and what to fix first. Built on fictional retail data.",
     tags: ["Data Analysis", "Dashboard", "JavaScript"],
