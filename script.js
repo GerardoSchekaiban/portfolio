@@ -7,7 +7,7 @@
 const GITHUB_USER = "";
 const GITHUB_MAX_REPOS = 6;
 
-// Based on folders found on your machine; review and adjust titles and descriptions.
+// Projects shown in the portfolio. A card with an `href` is a link to a report.
 const projects = [
   {
     title: "AI Usage & Cost Dashboard",
@@ -29,30 +29,6 @@ const projects = [
     demo: "",
     code: "",
   },
-  {
-    title: "PadelBook",
-    description: "Android app for booking padel courts. Describe the problem it solves, its main screens and the technologies you used (Kotlin/Java, Firebase, etc.).",
-    tags: ["Android", "Mobile"],
-    image: "",            // e.g. "img/padelbook.png" (empty = gradient with initial)
-    demo: "",             // live demo or video
-    code: "",             // repository
-  },
-  {
-    title: "RAG Agents with LLMs",
-    description: "Retrieval-augmented generation pipeline with large language models: document indexing, semantic search and agents that answer using retrieved context.",
-    tags: ["Python", "LLM", "Data"],
-    image: "",
-    demo: "",
-    code: "",
-  },
-  {
-    title: "Gradient Descent",
-    description: "Report and experiments on gradient descent optimization: implementation from scratch, effect of the learning rate and convergence.",
-    tags: ["Python", "Machine Learning", "Data"],
-    image: "",
-    demo: "",
-    code: "",             // you can link the PDF: "docs/gradient-descent-report.pdf"
-  },
 ];
 
 // Skills grouped by category
@@ -68,7 +44,10 @@ const skills = {
 
 const grid = document.getElementById("project-grid");
 const filtersEl = document.getElementById("filters");
-let activeTag = "All";
+// Category tabs shown above the cards. Add more names here (and matching `tags`
+// on the projects) when new kinds of work are added.
+const CATEGORIES = ["Data Analysis"];
+let activeTag = CATEGORIES[0];
 
 function makeCard(p) {
   // With an `href`, the whole card is a link that opens in a new tab
@@ -135,15 +114,14 @@ function makeCard(p) {
 function renderProjects() {
   grid.replaceChildren(
     ...projects
-      .filter((p) => activeTag === "All" || p.tags.includes(activeTag))
+      .filter((p) => p.tags.includes(activeTag))
       .map(makeCard)
   );
 }
 
 function renderFilters() {
-  const tags = ["All", ...new Set(projects.flatMap((p) => p.tags))];
   filtersEl.replaceChildren(
-    ...tags.map((t) => {
+    ...CATEGORIES.map((t) => {
       const b = document.createElement("button");
       b.type = "button";
       b.textContent = t;
