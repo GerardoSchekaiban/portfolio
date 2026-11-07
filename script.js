@@ -10,6 +10,16 @@ const GITHUB_MAX_REPOS = 6;
 // Based on folders found on your machine; review and adjust titles and descriptions.
 const projects = [
   {
+    title: "Metadata Quality Scorecard",
+    description: "Interactive report that turns the documentation coverage and quality of 800+ data tables into a story: where things stand, where the gaps are and what to fix first. Built on fictional retail data.",
+    tags: ["Data Analysis", "Dashboard", "JavaScript"],
+    image: "img/scorecard-preview.svg",
+    href: "reports/metadata-scorecard/",   // makes the whole card a link (opens in a new tab)
+    linkLabel: "Open interactive report",
+    demo: "",
+    code: "",
+  },
+  {
     title: "PadelBook",
     description: "Android app for booking padel courts. Describe the problem it solves, its main screens and the technologies you used (Kotlin/Java, Firebase, etc.).",
     tags: ["Android", "Mobile"],
@@ -51,8 +61,14 @@ const filtersEl = document.getElementById("filters");
 let activeTag = "All";
 
 function makeCard(p) {
-  const card = document.createElement("article");
+  // With an `href`, the whole card is a link that opens in a new tab
+  const card = document.createElement(p.href ? "a" : "article");
   card.className = "card";
+  if (p.href) {
+    card.href = p.href;
+    card.target = "_blank";
+    card.rel = "noopener";
+  }
 
   const thumb = document.createElement("div");
   thumb.className = "thumb";
@@ -85,7 +101,12 @@ function makeCard(p) {
 
   const actions = document.createElement("div");
   actions.className = "actions";
-  for (const [label, href] of [["Demo", p.demo], ["Code", p.code]]) {
+  if (p.href) {
+    const cta = document.createElement("span");
+    cta.textContent = (p.linkLabel || "Open") + " ↗";
+    actions.append(cta);
+  }
+  for (const [label, href] of p.href ? [] : [["Demo", p.demo], ["Code", p.code]]) {
     if (!href) continue;
     const a = document.createElement("a");
     a.href = href;

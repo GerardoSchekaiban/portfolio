@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Metadata Quality Scorecard — Demo</title>
+  <meta name="description" content="Interactive demo report on fictional data: how complete and how good is the documentation of a company's data tables?">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-left">
+    <h1>Metadata Quality Scorecard</h1>
+    <span class="pill">Demo</span>
+  </div>
+  <div class="top-right">
+    <span class="asof">Fictional retailer · data as of 1 Nov 2026</span>
+    <a class="top-btn" href="../../index.html#projects">← Portfolio</a>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab active" role="tab" aria-selected="true" data-tab="summary">Summary</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="about">About the score</button>
+</nav>
+
+<!-- ============================ SUMMARY ============================ -->
+<main id="tab-summary" class="pane active">
+
+  <section class="filters" aria-label="Filters">
+    <button id="f-cert" class="toggle" aria-pressed="false"><span class="dot"></span>Certified only</button>
+    <button id="f-master" class="toggle" aria-pressed="false"><span class="dot"></span>Exclude Master Data</button>
+    <label class="select">Status
+      <select id="f-status">
+        <option>Active</option>
+        <option>Draft</option>
+        <option>Deprecated</option>
+        <option>All</option>
+      </select>
+    </label>
+    <label class="select">Domain
+      <select id="f-domain"></select>
+    </label>
+    <span id="scope-count" class="scope-count"></span>
+    <span id="chips" class="chips"></span>
+    <button id="f-reset" class="reset" hidden>Reset filters</button>
+  </section>
+
+  <h2 class="eyebrow"><span>Platform overview</span></h2>
+
+  <section class="kpis" id="kpis">
+    <article class="kpi" data-kpi="avg">
+      <h3>Avg quality score</h3>
+      <p class="val"><span class="num">0</span></p>
+      <p class="sub">out of 100</p>
+      <p class="delta"></p>
+    </article>
+    <article class="kpi blue" data-kpi="coverage">
+      <h3>Metadata coverage</h3>
+      <p class="val"><span class="num">0</span>%</p>
+      <p class="sub" id="kpi-cov-sub"></p>
+      <p class="delta"></p>
+    </article>
+    <article class="kpi" data-kpi="n">
+      <h3>Tables scored</h3>
+      <p class="val"><span class="num">0</span></p>
+      <p class="sub">in scope</p>
+      <p class="delta"></p>
+    </article>
+    <article class="kpi" data-kpi="uncovered">
+      <h3>Uncovered tables</h3>
+      <p class="val"><span class="num">0</span></p>
+      <p class="sub">below the coverage bar</p>
+      <p class="delta"></p>
+    </article>
+    <article class="kpi red" data-kpi="unscored">
+      <h3>Unscored</h3>
+      <p class="val"><span class="num">0</span></p>
+      <p class="sub">score 0–24</p>
+      <p class="delta"></p>
+    </article>
+  </section>
+
+  <section class="legend" id="grade-legend" aria-label="Highlight domains by grade"></section>
+
+  <!-- 1. Quadrant -->
+  <section class="card">
+    <header class="card-head">
+      <h3>Coverage × Quality Quadrant</h3>
+      <span class="sub">each bubble = one domain · size = number of tables · click to focus</span>
+    </header>
+    <div class="sliders">
+      <label>Coverage divider <output id="o-cov">50%</output>
+        <input id="s-cov" type="range" min="20" max="90" step="5" value="50"></label>
+      <label>Quality divider <output id="o-qual">75</output>
+        <input id="s-qual" type="range" min="25" max="90" step="5" value="75"></label>
+    </div>
+    <div class="chart-box tall"><canvas id="c-quad" aria-label="Quadrant chart of coverage versus quality by domain" role="img"></canvas></div>
+    <p id="quad-insight" class="insight"></p>
+  </section>
+
+  <!-- 2. Dimensions + grades -->
+  <div class="row two">
+    <section class="card">
+      <header class="card-head">
+        <h3>Where points are lost</h3>
+        <span class="sub">avg points earned per scoring dimension, as % of the maximum</span>
+      </header>
+      <div class="chart-box"><canvas id="c-dims" aria-label="Average points earned per dimension" role="img"></canvas></div>
+      <p id="dims-insight" class="insight"></p>
+    </section>
+    <section class="card">
+      <header class="card-head">
+        <h3>Grade distribution</h3>
+        <span class="sub">all tables in the current view</span>
+      </header>
+      <div class="donut-wrap">
+        <div class="chart-box donut"><canvas id="c-grades" aria-label="Tables by grade" role="img"></canvas></div>
+        <ul id="grade-list" class="grade-list"></ul>
+      </div>
+    </section>
+  </div>
+
+  <!-- 3. Domain bars -->
+  <div class="row two">
+    <section class="card">
+      <header class="card-head">
+        <h3>Coverage by domain</h3>
+        <span class="sub">% of tables covered</span>
+      </header>
+      <div class="chart-box"><canvas id="c-cov" aria-label="Coverage by domain" role="img"></canvas></div>
+    </section>
+    <section class="card">
+      <header class="card-head">
+        <h3>Quality score by domain</h3>
+        <span class="sub">avg score 0–100, colored by grade</span>
+      </header>
+      <div class="chart-box"><canvas id="c-qual" aria-label="Quality score by domain" role="img"></canvas></div>
+    </section>
+  </div>
+  <div class="sortbar">
+    Sort domain bars by
+    <button class="seg active" data-sort="value" aria-pressed="true">Value</button>
+    <button class="seg" data-sort="name" aria-pressed="false">Name</button>
+  </div>
+
+  <!-- 4. Priorities -->
+  <section class="card">
+    <header class="card-head">
+      <h3>Where to act first</h3>
+      <span class="sub">domains ranked by impact (tables × points below Gold) · click to focus</span>
+    </header>
+    <ol id="priorities" class="priorities"></ol>
+  </section>
+
+  <p class="foot">All data in this demo is fictional and generated for illustration.</p>
+</main>
+
+<!-- ============================ ABOUT ============================ -->
+<main id="tab-about" class="pane">
+  <section class="card prose">
+    <h2>How the score works</h2>
+    <p>Every table gets a <strong>quality score from 0 to 100</strong>, calculated in your browser from the table's raw metadata fields. No score is stored anywhere, so every number on the Summary tab can be traced back to a simple rule.</p>
+
+    <h3>Coverage vs. quality</h3>
+    <p>They answer different questions and are deliberately kept apart.</p>
+    <ul>
+      <li><strong>Coverage</strong>: does documentation exist at all? A table is <em>covered</em> when it has a table description and at least half of its columns are described.</li>
+      <li><strong>Quality</strong>: how good is what exists? The average score across the tables in a domain.</li>
+    </ul>
+    <p>Plotting both gives four situations, each with a different action: <em>high/high</em> is the target, <em>high coverage / low quality</em> needs refinement, <em>low coverage / high quality</em> needs more documentation effort, and <em>low/low</em> is the top priority.</p>
+
+    <h3>Scoring dimensions</h3>
+    <table class="rules">
+      <thead><tr><th>Dimension</th><th>Max</th><th>How points are earned</th></tr></thead>
+      <tbody id="rules-body"></tbody>
+    </table>
+
+    <h3>Grade bands</h3>
+    <ul id="band-list" class="bands"></ul>
+
+    <h3>Filters</h3>
+    <ul>
+      <li><strong>Certified only</strong> keeps tables flagged as certified data products.</li>
+      <li><strong>Exclude Master Data</strong> removes the master-data domain, whose size can dominate the averages.</li>
+      <li><strong>Status</strong> selects Active (default), Draft, Deprecated or all tables.</li>
+    </ul>
+  </section>
+</main>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
