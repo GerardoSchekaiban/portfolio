@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medallion Architecture — Case study</title>
+  <meta name="description" content="Case study: a medallion architecture (bronze, silver, gold) that turns raw enterprise configuration data into three reusable data products, with quality gates, SCD Type 2 history and a decision log.">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Use the theme saved on the portfolio before first paint to avoid a flash
+    try {
+      const t = localStorage.getItem("theme");
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+</head>
+<body>
+
+<header class="bar">
+  <a class="back" href="../../index.html#projects">← Portfolio</a>
+  <nav aria-label="Sections">
+    <a href="#architecture">Architecture</a>
+    <a href="#lineage">Follow the data</a>
+    <a href="#gates">Quality gates</a>
+    <a href="#history">History</a>
+    <a href="#decisions">Decisions</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===================== Hero ===================== -->
+  <section class="hero">
+    <p class="kicker">Data engineering · case study</p>
+    <h1>Enterprise configuration data product: a medallion architecture</h1>
+    <p class="lead">
+      Enterprise configuration data (sites, accounts, nodes, software, entitlements) is scattered across dozens of
+      operational tables. This project designs a medallion architecture that turns those raw extracts into three
+      reusable data products. Each layer has one job, and quality checks run before the next layer does.
+    </p>
+    <dl class="facts">
+      <div><dt>Problem</dt><dd>Raw, duplicated, coded data from two instances of one source system</dd></div>
+      <div><dt>Approach</dt><dd>Bronze, silver and gold layers with quality gates</dd></div>
+      <div><dt>Output</dt><dd>Three gold products with history, read by BI and an LLM</dd></div>
+      <div><dt>My role</dt><dd>Architecture, data modelling and quality design</dd></div>
+    </dl>
+    <p class="note">This page is interactive. All sample rows and figures are fictional.</p>
+  </section>
+
+  <!-- ===================== Architecture ===================== -->
+  <section id="architecture">
+    <h2>The architecture, end to end</h2>
+    <p class="intro">Click a layer, or a numbered quality gate, to see what it does.</p>
+    <figure class="diagram-wrap" id="d-e2e"></figure>
+
+    <div class="layer-panel">
+      <div class="tabs" role="tablist" aria-label="Layers">
+        <button role="tab" id="tab-bronze" data-layer="bronze" aria-selected="true" aria-controls="layer-body">Bronze</button>
+        <button role="tab" id="tab-silver" data-layer="silver" aria-selected="false" aria-controls="layer-body">Silver</button>
+        <button role="tab" id="tab-gold" data-layer="gold" aria-selected="false" aria-controls="layer-body">Gold</button>
+      </div>
+      <div id="layer-body" role="tabpanel" aria-labelledby="tab-bronze"></div>
+    </div>
+  </section>
+
+  <!-- ===================== Lineage ===================== -->
+  <section id="lineage">
+    <h2>Follow the data</h2>
+    <p class="intro">The same two sites travel through all three layers. Hover or focus a row to see where it comes from and where it ends up.</p>
+
+    <div class="lineage" id="lineage-body"></div>
+  </section>
+
+  <!-- ===================== Gates ===================== -->
+  <section id="gates">
+    <h2>Quality gates: try to break one</h2>
+    <p class="intro">Every layer ends with a gate. Pick a failure, run the pipeline, and see what the consumers get. The rule is simple: <strong>better a day old than wrong</strong>.</p>
+
+    <div class="sim">
+      <fieldset class="scenarios">
+        <legend>Inject a failure</legend>
+        <div id="scenario-list"></div>
+        <div class="sim-actions">
+          <button class="btn primary" id="run">Run pipeline</button>
+          <button class="btn" id="run-reset" hidden>Reset</button>
+        </div>
+      </fieldset>
+
+      <div class="pipeline-wrap">
+        <ol class="pipeline" id="pipeline" aria-label="Pipeline status"></ol>
+        <div class="result" id="gate-result" aria-live="polite">Pick a scenario and run the pipeline.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== History ===================== -->
+  <section id="history">
+    <h2>History with SCD Type 2</h2>
+    <p class="intro">Gold keeps every version of a row. Change a site below and watch the old row close and a new one open.</p>
+
+    <div class="scd">
+      <form class="scd-form" id="scd-form">
+        <label>Status
+          <select id="scd-status">
+            <option>Pending install</option>
+            <option selected>Installed</option>
+            <option>Suspended</option>
+            <option>Retired</option>
+          </select>
+        </label>
+        <label>Node count
+          <input id="scd-nodes" type="number" min="0" max="9" value="1">
+        </label>
+        <label>Effective date
+          <input id="scd-date" type="date" value="2026-11-09">
+        </label>
+        <button class="btn primary" type="submit">Apply change</button>
+        <button class="btn" type="button" id="scd-reset">Reset</button>
+      </form>
+      <p class="scd-msg" id="scd-msg" aria-live="polite"></p>
+
+      <p class="tbl-title"><strong>ACC_SITE_DETAIL_HIST</strong> · history of SITE-1001</p>
+      <div class="table-wrap"><table id="scd-table"></table></div>
+
+      <p class="tbl-title"><strong>ACC_SITE_DETAIL</strong> · current view (history filtered to is_current = true)</p>
+      <div class="table-wrap"><table id="scd-current"></table></div>
+
+      <div class="timetravel">
+        <label>Time travel: what did we know on
+          <input id="tt-date" type="date" value="2026-04-01">
+        </label>
+        <p id="tt-msg" aria-live="polite"></p>
+      </div>
+
+      <p class="note">Each change closes the old row by setting <code>valid_to</code> and opens a new row. The open row uses 9999-12-31, so every site has exactly one current row.</p>
+    </div>
+  </section>
+
+  <!-- ===================== Decisions ===================== -->
+  <section id="decisions">
+    <h2>Decision log</h2>
+    <p class="intro">The choices that shape the design, and what each one costs.</p>
+    <div class="table-wrap">
+      <table class="log">
+        <thead><tr><th>Layer</th><th>Decision</th><th>Why</th><th>Trade-off</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pill bronze">Bronze</span></td><td>Keep sources exactly as received. No business logic, only load metadata.</td><td>Any run can be replayed, and a bad rule can never corrupt the raw copy.</td><td>Raw noise (duplicates, coded values) is stored and must be handled later.</td></tr>
+          <tr><td><span class="pill bronze">Bronze</span></td><td>One raw view per source instance.</td><td>The two instances differ in scope: one holds many object types, the other only site-level data.</td><td>Two inputs to reconcile in silver.</td></tr>
+          <tr><td><span class="pill silver">Silver</span></td><td>Define each business entity once, in silver.</td><td>Every product reads the same site, node and account definitions.</td><td>Silver changes need care, because all gold products depend on it.</td></tr>
+          <tr><td><span class="pill silver">Silver</span></td><td>Unify both instances with a <code>source_instance</code> flag.</td><td>One entity set for consumers, with the origin still visible.</td><td>Rows from different instances can collide on keys, hence the conform step.</td></tr>
+          <tr><td><span class="pill silver">Silver</span></td><td>Flag records, never delete them.</td><td>Nothing disappears silently, and consumers can filter on the flag.</td><td>Downstream code has to apply the flags it cares about.</td></tr>
+          <tr><td><span class="pill silver">Silver</span></td><td>Heavy logic in tables, light logic in views.</td><td>Expensive steps (site, node, lookup) run once per load. Simple ones stay fresh with no storage.</td><td>Tables add refresh steps and storage.</td></tr>
+          <tr><td><span class="pill silver">Silver</span></td><td>Generate a key for nodes with no serial number and flag them.</td><td>The node stays countable and traceable instead of being dropped.</td><td>A generated key is not a stable identity across sources.</td></tr>
+          <tr><td><span class="pill gold">Gold</span></td><td>Read only from silver, never from another gold product.</td><td>One place for business definitions, and no hidden chains between products.</td><td>Some joins are repeated across products.</td></tr>
+          <tr><td><span class="pill gold">Gold</span></td><td>Keep history as SCD Type 2, with a current view on top.</td><td>A full audit trail, and the current view always returns one row per site.</td><td>More rows, and a close-and-open step on every change.</td></tr>
+          <tr><td><span class="pill all">All</span></td><td>A failed quality gate keeps the previous version live.</td><td>Consumers get data that is a day old but correct, instead of fresh but wrong.</td><td>A persistent failure leaves data stale until someone fixes it.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer class="end">
+  <p>Case study. All sample data on this page is fictional.</p>
+  <p><a href="../../index.html#projects">← Back to the portfolio</a></p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

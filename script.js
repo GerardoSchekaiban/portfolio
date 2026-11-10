@@ -10,6 +10,16 @@ const GITHUB_MAX_REPOS = 6;
 // Projects shown in the portfolio. A card with an `href` is a link to a report.
 const projects = [
   {
+    title: "Medallion Architecture: Enterprise Data Product",
+    description: "Case study of a bronze, silver and gold architecture that turns raw, duplicated enterprise data into three reusable data products. Quality gates, SCD Type 2 history and a decision log, in an interactive demo on fictional data.",
+    tags: ["Data Engineering", "Architecture", "Data Modelling"],
+    image: "img/medallion-preview.svg",
+    href: "projects/medallion-architecture/",
+    linkLabel: "Open case study",
+    demo: "",
+    code: "",
+  },
+  {
     title: "AI Usage & Cost Dashboard",
     description: "Interactive report on who uses which AI models, what it costs and what changed. Cross-filtering, drag-to-select dates and written insights. Built on fictional data.",
     tags: ["Data Analysis", "Dashboard", "JavaScript"],
@@ -31,13 +41,6 @@ const projects = [
   },
 ];
 
-// Skills grouped by category
-const skills = {
-  "Languages": ["Python", "JavaScript", "SQL", "Kotlin / Java"],
-  "Data & ML": ["NumPy", "Pandas", "Matplotlib", "scikit-learn", "Jupyter", "LLMs / RAG"],
-  "Development": ["Android", "HTML / CSS", "Git", "Docker"],
-};
-
 // ============================================================
 //  LOGIC (you normally don't need to touch this)
 // ============================================================
@@ -46,7 +49,7 @@ const grid = document.getElementById("project-grid");
 const filtersEl = document.getElementById("filters");
 // Category tabs shown above the cards. Add more names here (and matching `tags`
 // on the projects) when new kinds of work are added.
-const CATEGORIES = ["Data Analysis"];
+const CATEGORIES = ["All", "Data Analysis", "Data Engineering"];
 let activeTag = CATEGORIES[0];
 
 function makeCard(p) {
@@ -114,7 +117,7 @@ function makeCard(p) {
 function renderProjects() {
   grid.replaceChildren(
     ...projects
-      .filter((p) => p.tags.includes(activeTag))
+      .filter((p) => activeTag === "All" || p.tags.includes(activeTag))
       .map(makeCard)
   );
 }
@@ -135,25 +138,6 @@ function renderFilters() {
       return b;
     })
   );
-}
-
-function renderSkills() {
-  const el = document.getElementById("skills");
-  for (const [group, items] of Object.entries(skills)) {
-    const wrap = document.createElement("div");
-    wrap.className = "skill-group";
-    const h = document.createElement("h3");
-    h.textContent = group;
-    const chips = document.createElement("div");
-    chips.className = "chips";
-    for (const s of items) {
-      const c = document.createElement("span");
-      c.textContent = s;
-      chips.append(c);
-    }
-    wrap.append(h, chips);
-    el.append(wrap);
-  }
 }
 
 // Public GitHub repos (optional)
@@ -187,7 +171,6 @@ async function loadGithub() {
 
 renderFilters();
 renderProjects();
-renderSkills();
 loadGithub();
 
 document.getElementById("year").textContent = new Date().getFullYear();

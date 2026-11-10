@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Preview of the medallion architecture case study: bronze, silver and gold layers connected by three numbered quality gates">
+  <rect width="640" height="360" fill="#eef2f6"/>
+  <rect x="16" y="16" width="608" height="328" rx="12" fill="#ffffff" stroke="#dde4ec"/>
+  <rect x="34" y="34" width="210" height="9" rx="4.5" fill="#14212e"/>
+  <rect x="34" y="52" width="320" height="6" rx="3" fill="#94a3b8"/>
+
+  <!-- sources -->
+  <rect x="34" y="92" width="62" height="170" rx="9" fill="none" stroke="#9aa5b1" stroke-width="1.6"/>
+  <rect x="34" y="92" width="62" height="22" rx="9" fill="#9aa5b1" fill-opacity=".3"/>
+  <rect x="42" y="124" width="46" height="36" rx="5" fill="#f3f4f6" stroke="#9aa5b1"/>
+  <rect x="42" y="168" width="46" height="36" rx="5" fill="#f3f4f6" stroke="#9aa5b1"/>
+
+  <!-- bronze -->
+  <rect x="124" y="92" width="116" height="170" rx="9" fill="#a65f1e" fill-opacity=".07" stroke="#a65f1e" stroke-width="2.2"/>
+  <rect x="124" y="92" width="116" height="22" rx="9" fill="#a65f1e" fill-opacity=".32"/>
+  <rect x="134" y="124" width="96" height="36" rx="5" fill="#f3f4f6" stroke="#9aa5b1"/>
+  <rect x="134" y="168" width="96" height="36" rx="5" fill="#f3f4f6" stroke="#9aa5b1"/>
+  <rect x="134" y="212" width="96" height="36" rx="5" fill="#f3f4f6" stroke="#9aa5b1"/>
+
+  <!-- silver -->
+  <rect x="284" y="92" width="130" height="170" rx="9" fill="#6b7787" fill-opacity=".07" stroke="#6b7787" stroke-width="2.2"/>
+  <rect x="284" y="92" width="130" height="22" rx="9" fill="#6b7787" fill-opacity=".32"/>
+  <rect x="294" y="124" width="110" height="36" rx="5" fill="#f3f4f6" stroke="#9aa5b1"/>
+  <rect x="294" y="168" width="110" height="36" rx="5" fill="#f3f4f6" stroke="#9aa5b1"/>
+  <rect x="294" y="212" width="110" height="36" rx="5" fill="#f3f4f6" stroke="#9aa5b1"/>
+
+  <!-- gold -->
+  <rect x="458" y="92" width="150" height="170" rx="9" fill="#b8860b" fill-opacity=".08" stroke="#b8860b" stroke-width="2.2"/>
+  <rect x="458" y="92" width="150" height="22" rx="9" fill="#b8860b" fill-opacity=".34"/>
+  <rect x="468" y="124" width="130" height="36" rx="5" fill="#f3f4f6" stroke="#9aa5b1"/>
+  <rect x="468" y="168" width="130" height="36" rx="5" fill="#f3f4f6" stroke="#9aa5b1"/>
+  <rect x="468" y="212" width="130" height="36" rx="5" fill="#f3f4f6" stroke="#9aa5b1"/>
+
+  <!-- flow arrows -->
+  <g stroke="#9aa5b1" stroke-width="1.8" fill="none">
+    <path d="M96 177H120"/><path d="M240 177H280"/><path d="M414 177H454"/>
+  </g>
+  <g fill="#9aa5b1"><path d="M122 177l-7-4v8z"/><path d="M282 177l-7-4v8z"/><path d="M456 177l-7-4v8z"/></g>
+
+  <!-- gates -->
+  <g font-family="sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="#14212e">
+    <circle cx="262" cy="103" r="11" fill="#fff" stroke="#14212e" stroke-width="1.6"/><text x="262" y="107.5">1</text>
+    <circle cx="436" cy="103" r="11" fill="#fff" stroke="#14212e" stroke-width="1.6"/><text x="436" y="107.5">2</text>
+    <circle cx="626" cy="103" r="0" fill="none"/>
+  </g>
+
+  <!-- version strip (history) -->
+  <g>
+    <rect x="34" y="282" width="574" height="44" rx="7" fill="#f3f4f6" stroke="#dde4ec"/>
+    <rect x="46" y="294" width="120" height="8" rx="4" fill="#94a3b8"/>
+    <rect x="46" y="308" width="80" height="6" rx="3" fill="#cbd5e1"/>
+    <rect x="212" y="292" width="120" height="22" rx="4" fill="#cbd5e1" fill-opacity=".7"/>
+    <rect x="340" y="292" width="120" height="22" rx="4" fill="#cbd5e1" fill-opacity=".7"/>
+    <rect x="468" y="292" width="128" height="22" rx="4" fill="#15803d" fill-opacity=".25" stroke="#15803d"/>
+  </g>
+</svg>

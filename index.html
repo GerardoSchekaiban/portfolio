@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gerardo — Portfolio</title>
-  <meta name="description" content="Gerardo's portfolio: projects, skills and contact.">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Gerardo's portfolio: projects, research and contact.">
+  <link rel="stylesheet" href="styles.css?v=20261109">
   <script>
     // Apply the saved theme before first paint to avoid a flash
     try {
@@ -20,7 +20,7 @@
     <nav>
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
-      <a href="#skills-section">Skills</a>
+      <a href="#research">Research</a>
       <a href="#contact">Contact</a>
       <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme">◐</button>
     </nav>
@@ -55,9 +55,40 @@
       <div id="project-grid" class="grid"></div>
     </section>
 
-    <section id="skills-section">
-      <h2>Skills</h2>
-      <div id="skills" class="skills"></div>
+    <section id="research">
+      <h2>Research</h2>
+      <article class="research-card">
+        <div class="rc-body">
+          <div class="rc-head">
+            <p class="rc-kicker">Globalink Research Internship</p>
+            <a class="rc-org" href="https://www.mitacs.ca" target="_blank" rel="noopener"
+               aria-label="Program managed by Mitacs. Opens mitacs.ca in a new tab">
+              <span>Managed by</span><i class="rc-logo" aria-hidden="true"></i>
+            </a>
+          </div>
+          <h3>Wastewater surveillance of SARS-CoV-2 in Halifax, Nova Scotia</h3>
+          <p class="rc-summary">
+            During a research internship in Canada I analyzed four years of wastewater data from four treatment plants.
+            I built a reproducible cleaning pipeline, used clustering to find shared weekly patterns across plants,
+            and tested whether concentration could be predicted. The honest result: the plants moved together,
+            flow did not matter, and the prediction failed, which shows exactly what data is missing.
+          </p>
+          <ul class="rc-stats">
+            <li><b>2,421 → 1,091</b><span>records after cleaning</span></li>
+            <li><b>94.6%</b><span>weeks in sync across plants</span></li>
+            <li><b>r = 0.02</b><span>flow vs. concentration</span></li>
+          </ul>
+          <div class="cta">
+            <a class="btn primary" href="research/wastewater-surveillance/" target="_blank" rel="noopener">Read the report ↗</a>
+            <a class="btn" href="research/certificate-of-completion.pdf" target="_blank" rel="noopener">Certificate ↗</a>
+          </div>
+        </div>
+        <div class="rc-visual">
+          <img src="img/research-presentation.jpg" width="900" height="1200" loading="lazy"
+               alt="Gerardo standing next to a screen showing the title slide of his research presentation, Data Analytics to Advance Municipal Wastewater Treatment.">
+          <p>Presenting the research results</p>
+        </div>
+      </article>
     </section>
 
     <section id="contact" class="contact">
@@ -75,6 +106,6 @@
     <p>© <span id="year"></span> Gerardo. Handcrafted with HTML, CSS and JS.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20261109"></script>
 </body>
 </html>

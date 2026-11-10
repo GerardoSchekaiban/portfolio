@@ -122,11 +122,38 @@ a.card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .filter:hover { border-color: var(--accent); color: var(--text); }
 .filter.active { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
 
-/* Skills */
-.skills { display: grid; gap: 26px; }
-.skill-group h3 { margin: 0 0 12px; font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
-.chips { display: flex; flex-wrap: wrap; gap: 10px; }
-.chips span { padding: 8px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: .95rem; }
+/* Research */
+.research-card {
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 0;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+}
+.rc-body { padding: 28px 30px; display: flex; flex-direction: column; gap: 14px; }
+.rc-kicker { margin: 0; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+.rc-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; }
+.rc-org { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); font-size: .75rem; text-decoration: none; }
+.rc-org:hover { color: var(--accent); }
+.rc-org:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+/* The logo is a transparent PNG used as a mask, so it takes the current text colour in both themes */
+.rc-logo {
+  display: block; width: 92px; aspect-ratio: 520 / 94; background-color: currentColor;
+  -webkit-mask: url("img/mitacs-logo.png") center / contain no-repeat;
+          mask: url("img/mitacs-logo.png") center / contain no-repeat;
+}
+.rc-org:not(:hover) .rc-logo { background-color: var(--text); }
+.research-card h3 { margin: 0; font-size: 1.3rem; line-height: 1.25; letter-spacing: -.01em; }
+.rc-summary { margin: 0; color: var(--muted); }
+.rc-stats { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.rc-stats li { border: 1px solid var(--border); border-radius: 10px; padding: 8px 14px; background: var(--bg); }
+.rc-stats b { display: block; color: var(--accent); font-size: 1.05rem; }
+.rc-stats span { font-size: .78rem; color: var(--muted); }
+.research-card .cta { margin-top: 6px; }
+.rc-visual { position: relative; min-height: 320px; border-left: 1px solid var(--border); background: #d9a400; }
+.rc-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%; display: block; }
+.rc-visual p {
+  position: absolute; left: 0; right: 0; bottom: 0; margin: 0; padding: 28px 16px 12px;
+  font-size: .82rem; font-weight: 600; color: #fff; text-align: left;
+  background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0));
+}
 
 /* Contact */
 .contact p { color: var(--muted); }
@@ -137,6 +164,10 @@ a.card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 footer { padding-top: 30px; padding-bottom: 40px; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--border); }
 
 @media (max-width: 720px) {
+  .research-card { grid-template-columns: minmax(0, 1fr); }
+  .rc-visual { border-left: 0; border-top: 1px solid var(--border); order: -1; min-height: 0; aspect-ratio: 4 / 3; }
+  .rc-visual img { object-position: 55% 35%; }
+  .rc-body { padding: 22px 20px; }
   .about { grid-template-columns: 1fr; gap: 24px; }
   .nav nav { gap: 14px; }
   .nav nav a { font-size: .85rem; }
