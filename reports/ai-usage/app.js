@@ -14,7 +14,7 @@
   const DEFAULT = { from: VS, to: LAST, product: null, model: null, user: null, query: "", metric: "cost" };
   const state = { ...DEFAULT };
 
-  const FONT = '-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif';
+  const FONT = 'Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
   const TEAL = "#0097a7", ORANGE = "#ff6a13", NAVY = "#0b2239";
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const METRIC_NAME = { cost: "Cost", tokens: "Tokens", requests: "Requests" };
@@ -613,4 +613,9 @@
   $$(".metric-bar .seg").forEach((b) => b.addEventListener("click", () => { state.metric = b.dataset.metric; render(); }));
 
   render();
+
+  // Canvas text needs the web font: redraw the charts once it has loaded
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => Object.values(Chart.instances).forEach((c) => c.update()));
+  }
 })();

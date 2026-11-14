@@ -1,13 +1,13 @@
 :root {
-  --bg: #fafaf8;
+  --bg: #f8f9fd;
   --surface: #ffffff;
-  --surface-2: #f3f4f6;
-  --text: #1c1c1c;
-  --muted: #5f6670;
-  --border: #e3e3de;
-  --edge: #9aa5b1;
-  --accent: #3b5bdb;
-  --accent-soft: #eef1fd;
+  --surface-2: #f0f2fa;
+  --text: #131535;
+  --muted: #555c82;
+  --border: #dfe2f1;
+  --edge: #a1a8c8;
+  --accent: #3d52d9;
+  --accent-soft: #e8ecff;
   --bronze: #a65f1e;
   --silver: #6b7787;
   --gold: #b8860b;
@@ -15,20 +15,20 @@
   --ok-soft: #e7f6ec;
   --bad: #c2410c;
   --bad-soft: #fdeee6;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+  --sans: Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0f1115; --surface: #171a21; --surface-2: #1e222b; --text: #e8e8e6; --muted: #9aa0aa;
-    --border: #272b34; --edge: #5b6574; --accent: #7c9bff; --accent-soft: #1a2038;
+    --bg: #131535; --surface: #1c1e45; --surface-2: #232652; --text: #edf0fb; --muted: #a0a8cc;
+    --border: #2f3365; --edge: #545c96; --accent: #9db4ff; --accent-soft: #20285b;
     --bronze: #d9954f; --silver: #a3afbe; --gold: #e5bc45;
     --ok: #4ade80; --ok-soft: #12281b; --bad: #fb923c; --bad-soft: #2b1b12;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0f1115; --surface: #171a21; --surface-2: #1e222b; --text: #e8e8e6; --muted: #9aa0aa;
-  --border: #272b34; --edge: #5b6574; --accent: #7c9bff; --accent-soft: #1a2038;
+  --bg: #131535; --surface: #1c1e45; --surface-2: #232652; --text: #edf0fb; --muted: #a0a8cc;
+  --border: #2f3365; --edge: #545c96; --accent: #9db4ff; --accent-soft: #20285b;
   --bronze: #d9954f; --silver: #a3afbe; --gold: #e5bc45;
   --ok: #4ade80; --ok-soft: #12281b; --bad: #fb923c; --bad-soft: #2b1b12;
 }
@@ -59,7 +59,7 @@ code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft
 
 main { max-width: 1040px; margin: 0 auto; padding: 0 20px 40px; }
 section { padding: 64px 0 8px; }
-h2 { font-size: 1.7rem; letter-spacing: -.02em; line-height: 1.2; }
+h2 { font-size: 1.7rem; letter-spacing: -.01em; line-height: 1.2; }
 .intro { color: var(--muted); margin: 8px 0 24px; max-width: 70ch; }
 .intro strong { color: var(--text); }
 .note { color: var(--muted); font-size: .88rem; margin-top: 16px; }
@@ -67,12 +67,12 @@ h2 { font-size: 1.7rem; letter-spacing: -.02em; line-height: 1.2; }
 /* ---------- Hero ---------- */
 .hero { padding-top: 56px; }
 .kicker { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--accent); }
-h1 { font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.12; letter-spacing: -.025em; margin: 10px 0 18px; max-width: 22ch; }
+h1 { font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.12; letter-spacing: -.015em; margin: 10px 0 18px; max-width: 22ch; }
 .lead { font-size: 1.12rem; color: var(--muted); max-width: 68ch; }
 .star { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-top: 28px; }
 .star li { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 4px; }
 .star li.star-result { border-color: var(--accent); background: var(--accent-soft); }
-.star-letter { font-size: 2.1rem; font-weight: 800; line-height: 1; color: var(--accent); letter-spacing: -.02em; }
+.star-letter { font-size: 2.1rem; font-weight: 800; line-height: 1; color: var(--accent); letter-spacing: -.01em; }
 .star h3 { font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 4px; }
 .star p { font-size: .93rem; line-height: 1.5; }
 
@@ -213,7 +213,7 @@ tr.tt td { background: var(--accent-soft); }
 .pill { flex: none; }
 .pill { font-size: .72rem; font-weight: 800; padding: 2px 10px; border-radius: 99px; color: #fff; display: inline-block; letter-spacing: .03em; }
 .pill.bronze { background: var(--bronze); } .pill.silver { background: var(--silver); } .pill.gold { background: var(--gold); } .pill.all { background: var(--accent); }
-[data-theme="dark"] .pill, :root:not([data-theme="light"]) .pill { color: #10131a; }
+[data-theme="dark"] .pill, :root:not([data-theme="light"]) .pill { color: #131535; }
 @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .pill { color: #fff; } }
 
 .end { max-width: 1040px; margin: 40px auto 0; padding: 26px 20px 50px; border-top: 1px solid var(--border); color: var(--muted); font-size: .88rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }

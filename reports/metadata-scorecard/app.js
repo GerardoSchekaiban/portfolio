@@ -15,7 +15,7 @@
   const state = { ...DEFAULTS };
   const BASE = D.overall(D.filterTables(ALL, DEFAULTS)); // "all active tables" reference
 
-  const FONT = '-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif';
+  const FONT = 'Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
   const GRADE = Object.fromEntries(D.GRADES.map((g) => [g.key, g]));
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -611,4 +611,9 @@
     `<li><i style="background:${g.color}"></i><strong>${g.key}</strong> ${g.range}</li>`).join("");
 
   render();
+
+  // Canvas text needs the web font: redraw the charts once it has loaded
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => Object.values(Chart.instances).forEach((c) => c.update()));
+  }
 })();
