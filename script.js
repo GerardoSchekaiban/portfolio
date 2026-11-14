@@ -11,8 +11,8 @@ const GITHUB_MAX_REPOS = 6;
 const projects = [
   {
     title: "Medallion Architecture: Enterprise Data Product",
-    description: "Case study of a bronze, silver and gold architecture that turns raw, duplicated enterprise data into three reusable data products. Quality gates, SCD Type 2 history and a decision log, in an interactive demo on fictional data.",
-    tags: ["Data Engineering", "Architecture", "Data Modelling"],
+    description: "Case study of a bronze, silver and gold architecture that turns raw, duplicated enterprise data into three reusable data products. Quality gates, SCD Type 2 history and key decisions, in an interactive demo.",
+    tags: ["Data Architecture", "Data Modelling", "Data Quality"],
     image: "img/medallion-preview.svg",
     href: "projects/medallion-architecture/",
     linkLabel: "Open case study",
@@ -21,7 +21,7 @@ const projects = [
   },
   {
     title: "AI Usage & Cost Dashboard",
-    description: "Interactive report on who uses which AI models, what it costs and what changed. Cross-filtering, drag-to-select dates and written insights. Built on fictional data.",
+    description: "Interactive report on who uses which AI models, what it costs and what changed. Cross-filtering, drag-to-select dates and written insights.",
     tags: ["Data Analysis", "Dashboard", "JavaScript"],
     image: "img/ai-usage-preview.svg",
     href: "reports/ai-usage/",
@@ -31,7 +31,7 @@ const projects = [
   },
   {
     title: "Metadata Quality Scorecard",
-    description: "Interactive report that turns the documentation coverage and quality of 800+ data tables into a story: where things stand, where the gaps are and what to fix first. Built on fictional retail data.",
+    description: "Interactive report that turns the documentation coverage and quality of 800+ data tables into a story: where things stand, where the gaps are and what to fix first.",
     tags: ["Data Analysis", "Dashboard", "JavaScript"],
     image: "img/scorecard-preview.svg",
     href: "reports/metadata-scorecard/",   // makes the whole card a link (opens in a new tab)
@@ -49,7 +49,7 @@ const grid = document.getElementById("project-grid");
 const filtersEl = document.getElementById("filters");
 // Category tabs shown above the cards. Add more names here (and matching `tags`
 // on the projects) when new kinds of work are added.
-const CATEGORIES = ["All", "Data Analysis", "Data Engineering"];
+const CATEGORIES = ["All", "Data Analysis", "Data Architecture"];
 let activeTag = CATEGORIES[0];
 
 function makeCard(p) {
