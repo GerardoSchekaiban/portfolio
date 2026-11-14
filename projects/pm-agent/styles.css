@@ -1,0 +1,88 @@
+:root {
+  --bg: #fafaf8;
+  --surface: #ffffff;
+  --surface-2: #f3f4f6;
+  --text: #1c1c1c;
+  --muted: #5f6670;
+  --border: #e3e3de;
+  --accent: #3b5bdb;
+  --accent-soft: #eef1fd;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1115; --surface: #171a21; --surface-2: #1e222b; --text: #e8e8e6; --muted: #9aa0aa;
+    --border: #272b34; --accent: #7c9bff; --accent-soft: #1a2038;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1115; --surface: #171a21; --surface-2: #1e222b; --text: #e8e8e6; --muted: #9aa0aa;
+  --border: #272b34; --accent: #7c9bff; --accent-soft: #1a2038;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.6; }
+h1, h2, h3, p, ol, ul, figure { margin: 0; padding: 0; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- Top bar ---------- */
+.bar {
+  position: sticky; top: 0; z-index: 20; height: 56px;
+  padding: 0 max(20px, calc((100% - 1040px) / 2 + 20px));
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border); font-size: .9rem;
+}
+.bar a { text-decoration: none; }
+.bar .back { font-weight: 600; white-space: nowrap; }
+.bar nav { display: flex; gap: 18px; }
+.bar nav a { color: var(--muted); white-space: nowrap; }
+.bar nav a:hover { color: var(--accent); }
+
+main { max-width: 1040px; margin: 0 auto; padding: 0 20px 40px; }
+section { padding: 56px 0 8px; }
+.sec { font-size: 1.7rem; letter-spacing: -.02em; line-height: 1.2; }
+.intro { color: var(--muted); margin: 8px 0 24px; max-width: 70ch; }
+
+/* ---------- Hero ---------- */
+.hero { padding-top: 56px; }
+.kicker { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--accent); }
+h1 { font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.12; letter-spacing: -.025em; margin: 10px 0 18px; max-width: 20ch; }
+.lead { font-size: 1.12rem; color: var(--muted); max-width: 68ch; }
+.stack { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.stack li { font-size: .8rem; padding: 3px 12px; border-radius: 99px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); }
+
+.star { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin-top: 28px; }
+.star li { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 4px; }
+.star-letter { font-size: 2.1rem; font-weight: 800; line-height: 1; color: var(--accent); letter-spacing: -.02em; }
+.star h2 { font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 4px; }
+.star p { font-size: .93rem; line-height: 1.5; }
+
+/* ---------- Flow diagram ---------- */
+.flow-fig { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px; overflow-x: auto; }
+.flow-fig a { display: block; }
+.flow-fig img { display: block; width: 100%; height: auto; border-radius: 8px; background: #fff; }
+.flow-fig figcaption { font-size: .84rem; color: var(--muted); margin-top: 10px; }
+
+/* ---------- Result ---------- */
+.result-panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 28px; align-items: center; background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 14px; padding: 26px 28px; }
+.stat b { display: block; font-size: clamp(1.8rem, 4.4vw, 2.6rem); line-height: 1.1; letter-spacing: -.02em; color: var(--accent); }
+.stat span { display: block; margin-top: 8px; color: var(--muted); font-size: .95rem; }
+.wins { list-style: none; display: grid; gap: 12px; }
+.wins li { position: relative; padding-left: 26px; font-size: .97rem; }
+.wins li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--accent); font-weight: 800; }
+
+.end { max-width: 1040px; margin: 40px auto 0; padding: 26px 20px 50px; border-top: 1px solid var(--border); color: var(--muted); font-size: .88rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.end p { margin: 0; }
+
+@media (max-width: 760px) {
+  .result-panel { grid-template-columns: minmax(0, 1fr); gap: 18px; padding: 20px; }
+  /* keep the diagram readable: let it scroll sideways inside its box */
+  .flow-fig img { min-width: 720px; }
+}
+@media (max-width: 560px) {
+  main { padding: 0 14px 30px; }
+  .bar nav { display: none; }
+}

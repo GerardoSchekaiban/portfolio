@@ -10,6 +10,16 @@ const GITHUB_MAX_REPOS = 6;
 // Projects shown in the portfolio. A card with an `href` is a link to a report.
 const projects = [
   {
+    title: "PM Agent: Automated Idea Intake",
+    description: "Agentic AI workflow that triages new product ideas the moment they are submitted. An LLM classifies each idea, a vector search finds similar past ideas, and the right product manager is notified. Time to a correctly assigned owner: from 5 days to 3 minutes.",
+    tags: ["Agentic AI", "LLM", "Vector Search"],
+    image: "img/pm-agent-preview.svg",
+    href: "projects/pm-agent/",
+    linkLabel: "Open case study",
+    demo: "",
+    code: "",
+  },
+  {
     title: "Medallion Architecture: Enterprise Data Product",
     description: "Case study of a bronze, silver and gold architecture that turns raw, duplicated enterprise data into three reusable data products. Quality gates, SCD Type 2 history and key decisions, in an interactive demo.",
     tags: ["Data Architecture", "Data Modelling", "Data Quality"],
@@ -49,7 +59,7 @@ const grid = document.getElementById("project-grid");
 const filtersEl = document.getElementById("filters");
 // Category tabs shown above the cards. Add more names here (and matching `tags`
 // on the projects) when new kinds of work are added.
-const CATEGORIES = ["All", "Data Analysis", "Data Architecture"];
+const CATEGORIES = ["All", "Data Analysis", "Data Architecture", "Agentic AI"];
 let activeTag = CATEGORIES[0];
 
 function makeCard(p) {

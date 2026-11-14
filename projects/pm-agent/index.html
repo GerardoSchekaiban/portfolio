@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PM Agent — Case study</title>
+  <meta name="description" content="Case study: an agentic AI workflow that triages new product ideas the moment they are submitted, using an LLM as a semantic classifier and a vector search over past ideas.">
+  <link rel="stylesheet" href="styles.css?v=1">
+  <script>
+    // Use the theme saved on the portfolio before first paint to avoid a flash
+    try {
+      const t = localStorage.getItem("theme");
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+</head>
+<body>
+
+<header class="bar">
+  <a class="back" href="../../index.html#projects">← Portfolio</a>
+  <nav aria-label="Sections">
+    <a href="#flow">The flow</a>
+    <a href="#result">Result</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===================== Hero + S, T, A ===================== -->
+  <section class="hero">
+    <p class="kicker">Agentic AI · case study</p>
+    <h1>PM Agent: automated idea intake and routing</h1>
+    <p class="lead">
+      An agentic AI workflow that triages every new product idea the moment it is submitted:
+      it classifies the idea, assigns the right owner, finds similar past ideas and notifies the product manager.
+    </p>
+    <ul class="stack" aria-label="Built with">
+      <li>n8n</li>
+      <li>LLM (Claude)</li>
+      <li>Vector search</li>
+      <li>Data warehouse</li>
+      <li>Email</li>
+    </ul>
+
+    <ol class="star" aria-label="Situation, Task, Action">
+      <li>
+        <span class="star-letter" aria-hidden="true">S</span>
+        <h2>Situation</h2>
+        <p>New product ideas from internal stakeholders were reviewed, categorized and routed by hand by a product management team. There was no practical way to check whether a similar idea had already been submitted, evaluated or rejected elsewhere in the organization, so acknowledging new ideas was slow and inconsistent.</p>
+      </li>
+      <li>
+        <span class="star-letter" aria-hidden="true">T</span>
+        <h2>Task</h2>
+        <p>I was responsible for designing and building an automated system that could take over the entire idea-intake process end to end.</p>
+      </li>
+      <li>
+        <span class="star-letter" aria-hidden="true">A</span>
+        <h2>Action</h2>
+        <p>I designed and built an agentic AI workflow that combines an idea-intake integration, an LLM used as a semantic classifier, a vector-based similarity search over historical submissions, and automated notifications and status updates.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ===================== The flow ===================== -->
+  <section id="flow">
+    <h2 class="sec">The flow</h2>
+    <p class="intro">From a submitted idea to a notified product manager, with no manual step in between.</p>
+    <figure class="flow-fig">
+      <a href="pm-agent-flow.png" target="_blank" rel="noopener" aria-label="Open the flow diagram full size in a new tab">
+        <img src="pm-agent-flow.png" width="1403" height="911"
+             alt="Flow diagram of the PM Agent. A new idea request is submitted and an email notification triggers an n8n workflow. The agent checks whether the idea qualifies for processing. If it does, an LLM analyzes the request and identifies the product area, the agent selects the product manager from the directory, updates the idea request, retrieves the updated attributes, checks a vector store for similar ideas, and emails the assigned product manager with the SLA and the similar ideas found.">
+      </a>
+      <figcaption>End-to-end flow of the PM Agent. Click the diagram to open it full size.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ===================== Result ===================== -->
+  <section id="result">
+    <h2 class="sec">Result</h2>
+    <p class="intro">The system replaced a manual, inconsistent triage step with an automated one that runs the moment an idea is submitted.</p>
+    <div class="result-panel">
+      <div class="stat">
+        <b>5 days → 3 minutes</b>
+        <span>from submission to a correctly assigned owner</span>
+      </div>
+      <ul class="wins">
+        <li>Eliminated manual idea triage and routing for the product management team.</li>
+        <li>Gave every reviewer visibility into related prior work across the entire organization.</li>
+        <li>Made SLA tracking automatic and consistent instead of calculated by hand for each idea, improving on-time review rates.</li>
+        <li>Replaced keyword-based tagging with semantic understanding, improving the accuracy of idea-to-owner assignment and idea-to-idea matching.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="end">
+  <p>Case study of real work.</p>
+  <p><a href="../../index.html#projects">← Back to the portfolio</a></p>
+</footer>
+
+</body>
+</html>
