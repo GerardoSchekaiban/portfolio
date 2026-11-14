@@ -34,8 +34,6 @@ h1, h2, h3, p, ul, ol, figure { margin: 0; }
   border-bottom: 1px solid var(--border); font-size: .92rem;
 }
 .bar a { text-decoration: none; font-weight: 600; }
-.bar .pdf { border: 1px solid var(--border); border-radius: 999px; padding: 5px 14px; color: var(--text); }
-.bar .pdf:hover { border-color: var(--accent); color: var(--accent); }
 
 /* Layout */
 .layout { max-width: 1120px; margin: 0 auto; padding: 40px 20px 20px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; }
