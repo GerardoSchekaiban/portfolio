@@ -184,14 +184,3 @@ renderProjects();
 loadGithub();
 
 document.getElementById("year").textContent = new Date().getFullYear();
-
-// Light/dark theme toggle
-document.getElementById("theme-toggle").addEventListener("click", () => {
-  const root = document.documentElement;
-  const isDark =
-    root.dataset.theme === "dark" ||
-    (!root.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
-  const next = isDark ? "light" : "dark";
-  root.dataset.theme = next;
-  try { localStorage.setItem("theme", next); } catch (e) {}
-});
